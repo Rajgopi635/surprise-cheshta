@@ -390,12 +390,21 @@
     // Password Check
     function checkPassword() {
       const input = document.getElementById('passInput').value.trim();
-      if (input.toLowerCase() === 'cheshu') {
+      const captcha = document.getElementById('captcha').checked;
+
+      // Check if Captcha is checked
+      if (!captcha) {
+        alert('Please check "I\'m not a robot" box first! 🤖');
+        return;
+      }
+
+      // Check Password
+      if (input.toLowerCase() === 'cheshta') {
         triggerConfetti();
         nextSlide(2);
       } else {
-        gsap.to('.pwd-card', { x: [-10, 10, -10, 10, 0], duration: 0.4 });
-        alert('Wrong Password! Hint: Enter "Tumhara wo naam jo mai bulata hu"');
+        gsap.to('.pwd-card', { x: [-10, 10, -10, 10, 0], duration: 0.3 });
+        alert('Wrong Password!');
       }
     }
 
