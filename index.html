@@ -3,17 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Special Surprise for you ❤️</title>
+  <title>A Special Surprise for Cheshta ❤️</title>
+  
+  <!-- Google Fonts & GSAP + Confetti Libraries -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Sacramento&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Poppins', sans-serif;
     }
 
     body {
-      background: #fce4ec;
+      background: #111; /* Dark background like video */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -21,61 +27,56 @@
       overflow: hidden;
     }
 
-    .container {
-      width: 90%;
-      max-width: 700px;
+    /* Outer Frame Mockup */
+    .laptop-frame {
+      width: 95%;
+      max-width: 720px;
       height: 480px;
-      background: #ffffff;
+      background: #fff;
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(225, 112, 137, 0.3);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
       position: relative;
       overflow: hidden;
-      border: 8px solid #f8bbd0;
+      border: 10px solid #f8bbd0;
     }
 
     .slide {
       position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       display: none;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 25px;
+      padding: 30px;
       text-align: center;
-      background-image: radial-gradient(#f8bbd0 1px, transparent 1px);
-      background-size: 20px 20px;
-      background-color: #fff5f8;
-      animation: fadeIn 0.5s ease-in-out;
+      background-color: #fff0f5;
+      background-image: 
+        radial-gradient(#f48fb1 1.5px, transparent 1.5px),
+        linear-gradient(to right, rgba(233,30,99,0.05) 1px, transparent 1px);
+      background-size: 24px 24px, 100% 100%;
     }
 
     .slide.active {
       display: flex;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    /* Wave Background Design */
+    /* Video Side Decorative Wave */
     .slide::before {
       content: "";
       position: absolute;
-      top: 0;
       left: 0;
-      width: 150px;
+      top: 0;
+      width: 120px;
       height: 100%;
-      background: #e91e63;
-      border-radius: 0 100% 100% 0 / 0 50% 50% 0;
-      opacity: 0.15;
-      z-index: 0;
+      background: radial-gradient(circle at 0% 50%, #ad1457 0%, #e91e63 100%);
+      clip-path: polygon(0 0, 70% 0, 100% 50%, 70% 100%, 0 100%);
+      opacity: 0.85;
+      z-index: 1;
     }
 
-    .content {
-      z-index: 1;
+    .content-box {
+      z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -83,272 +84,334 @@
     }
 
     h1 {
-      color: #ad1457;
-      font-size: 26px;
-      margin-bottom: 12px;
-      font-weight: 700;
-    }
-
-    p {
       color: #880e4f;
-      font-size: 16px;
-      margin-bottom: 20px;
-      line-height: 1.5;
+      font-family: 'Fredoka', cursive;
+      font-size: 28px;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
     }
 
-    img.sticker {
-      width: 110px;
-      height: 110px;
-      object-fit: contain;
+    .script-text {
+      font-family: 'Sacramento', cursive;
+      font-size: 32px;
+      color: #ad1457;
       margin-bottom: 15px;
-      filter: drop-shadow(0px 5px 5px rgba(0,0,0,0.1));
     }
 
-    /* Password Input Box */
-    .password-box {
-      background: #fff;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-      border: 1px solid #f48fb1;
-      width: 280px;
+    /* Password Screen Styling */
+    .pwd-card {
+      background: white;
+      padding: 25px 35px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      border: 1px solid #f8bbd0;
+      width: 320px;
     }
 
-    input[type="password"] {
+    .pwd-card input[type="password"] {
       width: 100%;
       padding: 10px;
-      margin-bottom: 15px;
-      border: 2px solid #f48fb1;
+      border: 2px solid #e91e63;
       border-radius: 8px;
       text-align: center;
-      font-size: 16px;
+      font-size: 18px;
       outline: none;
+      margin: 12px 0;
+    }
+
+    /* Captcha Checkbox Simulation */
+    .captcha-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 15px;
+      background: #f9f9f9;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
     }
 
     /* Buttons */
+    .btn {
+      background: linear-gradient(135deg, #e91e63, #ad1457);
+      color: white;
+      border: none;
+      padding: 10px 28px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+      transition: transform 0.2s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-secondary {
+      background: #880e4f;
+    }
+
     .btn-group {
       display: flex;
       gap: 15px;
     }
 
-    .btn {
+    /* Cute Sticker Image */
+    .sticker {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      margin-bottom: 15px;
+    }
+
+    /* Envelope Interactive Container */
+    .envelope-wrapper {
+      width: 180px;
+      height: 120px;
       background: #e91e63;
-      color: white;
-      border: none;
-      padding: 10px 25px;
-      font-size: 16px;
-      font-weight: 600;
-      border-radius: 25px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(233, 30, 99, 0.3);
-      transition: all 0.2s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      background: #c2185b;
-    }
-
-    .btn-secondary {
-      background: #f48fb1;
-    }
-
-    /* Envelope styling */
-    .envelope {
-      width: 200px;
-      height: 130px;
-      background: #f48fb1;
-      border-radius: 10px;
+      border-radius: 8px;
       position: relative;
       cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-      margin-bottom: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      animation: float 2.5s ease-in-out infinite;
     }
 
-    .envelope::after {
+    .envelope-wrapper::after {
       content: "🎀";
-      font-size: 30px;
+      font-size: 32px;
     }
 
-    /* Letter Card */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Letter Card Inside */
     .letter-card {
-      background: #ffffff;
-      border: 2px dashed #f48fb1;
+      background: #fff;
+      border: 2px dashed #e91e63;
       padding: 20px;
-      border-radius: 15px;
-      max-width: 420px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-radius: 12px;
+      max-width: 440px;
+      font-size: 15px;
+      color: #4a148c;
+      line-height: 1.6;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     }
 
-    /* Photo Frame Grid */
-    .photo-grid {
+    /* Polaroids Hanging String Effect */
+    .polaroid-container {
       display: flex;
-      gap: 12px;
+      gap: 15px;
       margin-bottom: 15px;
     }
 
-    .photo-frame {
+    .polaroid {
+      background: white;
+      padding: 8px 8px 18px 8px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+      transform: rotate(-4deg);
+      border-radius: 4px;
       width: 110px;
-      height: 120px;
-      background: #fff;
-      padding: 6px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transform: rotate(-3deg);
-      border-radius: 5px;
     }
 
-    .photo-frame:nth-child(2) {
-      transform: rotate(3deg);
+    .polaroid:nth-child(2) {
+      transform: rotate(4deg);
     }
 
-    .photo-frame img {
+    .polaroid img {
       width: 100%;
-      height: 85px;
+      height: 90px;
       object-fit: cover;
-      border-radius: 3px;
-    }
-
-    .photo-frame p {
-      font-size: 10px;
-      margin: 3px 0 0 0;
-      color: #555;
+      border-radius: 2px;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
+  <div class="laptop-frame">
 
+    <!-- Slide 1: Password Gate -->
     <div class="slide active" id="slide1">
-      <div class="content">
-        <div class="password-box">
-          <p style="margin-bottom: 10px; font-weight: 600;">Enter the password to view</p>
-          <input type="password" id="passInput" placeholder="Password: cheshta">
+      <div class="content-box">
+        <div class="pwd-card">
+          <p style="font-weight: 600; color: #333;">Enter the password to view</p>
+          <input type="password" id="passInput" placeholder="Enter 'cheshta'">
+          <div class="captcha-box">
+            <input type="checkbox" id="captcha">
+            <label for="captcha">I'm not a robot 🤖</label>
+          </div>
           <button class="btn" onclick="checkPassword()">Continue</button>
         </div>
       </div>
     </div>
 
+    <!-- Slide 2: Hey Cheshta -->
     <div class="slide" id="slide2">
-      <div class="content">
-        <img class="sticker" src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Cute Dog">
-        <h1>HEY CHESHTA! ✨</h1>
-        <p>I made something special for you.<br>Do you want to see?</p>
-        <div class="btn-group">
+      <div class="content-box">
+        <img class="sticker animate-element" src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Dog Flower">
+        <h1 class="animate-element">HEY CHESHTA!! ✨</h1>
+        <p class="script-text animate-element">I made something for you</p>
+        <p class="animate-element" style="color: #666; margin-bottom: 15px;">Do you want to see?</p>
+        <div class="btn-group animate-element">
           <button class="btn" onclick="nextSlide(4)">Yes</button>
           <button class="btn btn-secondary" onclick="nextSlide(3)">No</button>
         </div>
       </div>
     </div>
 
+    <!-- Slide 3: How Dare You -->
     <div class="slide" id="slide3">
-      <div class="content">
-        <img class="sticker" src="https://cdn-icons-png.flaticon.com/512/616/616554.png" alt="Angry Dog">
-        <h1>HOW DARE YOU 😤</h1>
-        <p>Aisa option select karne ki tumhari himmat kaise hui?</p>
-        <button class="btn" onclick="nextSlide(2)">Go back</button>
+      <div class="content-box">
+        <img class="sticker animate-element" src="https://cdn-icons-png.flaticon.com/512/616/616554.png" alt="Angry Dog">
+        <h1 class="animate-element" style="color: #c2185b;">HOW DARE YOU 😤</h1>
+        <p class="animate-element" style="margin: 15px 0;">Suno! 'No' wala option bilkul allowed nahi hai 😜</p>
+        <button class="btn animate-element" onclick="nextSlide(2)">Go back</button>
       </div>
     </div>
 
+    <!-- Slide 4: That's a good girl -->
     <div class="slide" id="slide4">
-      <div class="content">
-        <img class="sticker" src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Happy Dog">
-        <h1>That's a good girl ✨🌸</h1>
-        <p>You know how much valuable you are for me?</p>
-        <button class="btn" onclick="nextSlide(5)">Click</button>
+      <div class="content-box">
+        <img class="sticker animate-element" src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Cute Dog">
+        <h1 class="animate-element">That's a good Gurlll 🌻</h1>
+        <p class="animate-element" style="margin: 15px 0; color: #880e4f;">Aage dekhne ke liye click karo 👇</p>
+        <button class="btn animate-element" onclick="nextSlide(5)">Click</button>
       </div>
     </div>
 
+    <!-- Slide 5: Main Wish -->
     <div class="slide" id="slide5">
-      <div class="content">
-        <img class="sticker" src="https://cdn-icons-png.flaticon.com/512/3159/3159420.png" alt="Party Dog">
-        <h1>YOU ARE SPECIAL CHESHTA 💖</h1>
-        <p>YOU ARE MY FAVORITE NOTIFICATION 📱<br>STAY CUTE, STAY HAPPY, STAY FOREVER WITH ME ✨</p>
-        <button class="btn" onclick="nextSlide(6)">Next ➔</button>
+      <div class="content-box">
+        <img class="sticker animate-element" src="https://cdn-icons-png.flaticon.com/512/3159/3159420.png" alt="Happy Dog">
+        <h1 class="animate-element">FOR MY FAVORITE PERSON 💖</h1>
+        <p class="animate-element" style="font-size: 15px; color: #ad1457; font-weight: 600; margin: 10px 0;">
+          YOU ARE MY FAVORITE NOTIFICATION 💕<br>STAY CUTE, STAY HAPPY, STAY POSITIVE ✨
+        </p>
+        <button class="btn animate-element" onclick="nextSlide(6)">Next ➔</button>
       </div>
     </div>
 
+    <!-- Slide 6: Envelope -->
     <div class="slide" id="slide6">
-      <div class="content">
-        <h1>A Message For You 💌</h1>
-        <div class="envelope" onclick="nextSlide(7)">
-          <span style="position: absolute; bottom: 10px; color: white; font-weight: 600;">Tap here to open</span>
+      <div class="content-box">
+        <h1 class="animate-element">A Special Envelope 💌</h1>
+        <br>
+        <div class="envelope-wrapper animate-element" onclick="nextSlide(7)">
+          <span style="position: absolute; bottom: 8px; color: white; font-size: 12px;">Tap here to open</span>
         </div>
       </div>
     </div>
 
+    <!-- Slide 7: Emotional Letter -->
     <div class="slide" id="slide7">
-      <div class="content">
-        <div class="letter-card">
-          <p style="font-size: 15px; color: #4a148c; font-weight: 500;">
-            "Cheshta, you are seen, you are heard, and you are truly valued. No matter what happens, if you ever feel down or overwhelmed, just remember that you always have someone who genuinely cares about you, supports you, and wishes the absolute best for you. Keep smiling always! ✨❤️"
-          </p>
+      <div class="content-box">
+        <div class="letter-card animate-element">
+          "Cheshta, you are seen, you are heard, and you are loved. No matter what, if you ever feel sad or down, remember that you always have someone who genuinely values you. Your smile makes everything better! ✨❤️"
         </div>
         <br>
-        <button class="btn" onclick="nextSlide(8)">Click here ➔</button>
+        <button class="btn animate-element" onclick="triggerConfetti(); nextSlide(8)">Click here ➔</button>
       </div>
     </div>
 
+    <!-- Slide 8: Photo Collage -->
     <div class="slide" id="slide8">
-      <div class="content">
-        <div class="photo-grid">
-          <div class="photo-frame">
-            <img src="https://picsum.photos/200/200?random=1" alt="Photo 1">
-            <p>Best Moments</p>
+      <div class="content-box">
+        <div class="polaroid-container animate-element">
+          <div class="polaroid">
+            <img src="https://picsum.photos/200/200?random=11" alt="Memory 1">
           </div>
-          <div class="photo-frame">
-            <img src="https://picsum.photos/200/200?random=2" alt="Photo 2">
-            <p>Always Smiling</p>
-          </div>
-          <div class="photo-frame">
-            <img src="https://picsum.photos/200/200?random=3" alt="Photo 3">
-            <p>Favorite Person</p>
+          <div class="polaroid">
+            <img src="https://picsum.photos/200/200?random=12" alt="Memory 2">
           </div>
         </div>
-        <h1>I VALUED OUR BOND 🤍</h1>
-        <p>You don't know how much you mean to me!</p>
-        <button class="btn" onclick="nextSlide(9)">Click here ➔</button>
+        <h1 class="animate-element">I VALUE YOU! 💕</h1>
+        <p class="animate-element" style="color: #ad1457; margin-bottom: 15px;">You don't know how much you mean to me</p>
+        <button class="btn animate-element" onclick="nextSlide(9)">Tap here ➔</button>
       </div>
     </div>
 
+    <!-- Slide 9: Gift Box -->
     <div class="slide" id="slide9">
-      <div class="content">
-        <h1>Here's a surprise for you! 🎁</h1>
-        <div style="font-size: 70px; cursor: pointer; margin: 15px 0;" onclick="nextSlide(10)">
+      <div class="content-box">
+        <h1 class="animate-element">Here's a surprise for you!!! 🎁</h1>
+        <div class="animate-element" style="font-size: 70px; cursor: pointer; margin: 15px 0;" onclick="triggerConfetti(); nextSlide(10)">
           🎁
         </div>
-        <p>Tap on the gift box!</p>
+        <p class="animate-element" style="color: #880e4f;">Tap on the box!</p>
       </div>
     </div>
 
+    <!-- Slide 10: Virtual Hug -->
     <div class="slide" id="slide10">
-      <div class="content">
-        <img class="sticker" src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" alt="Virtual Hug" style="width: 140px; height: 140px;">
-        <h1>Here is a big virtual hug for you! 🤗✨</h1>
-        <p>Always stay happy Cheshta! ❤️</p>
+      <div class="content-box">
+        <img class="sticker animate-element" src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" alt="Hug" style="width: 140px; height: 140px;">
+        <h1 class="animate-element">Here is a virtual hug for you! 🤗🤍</h1>
+        <p class="animate-element" style="color: #ad1457; font-size: 18px; margin-top: 10px;">Always keep smiling Cheshta! ✨</p>
       </div>
     </div>
 
   </div>
 
   <script>
+    // Slide Navigation with GSAP Animation
     function nextSlide(slideNumber) {
-      const slides = document.querySelectorAll('.slide');
-      slides.forEach(slide => slide.classList.remove('active'));
-      document.getElementById('slide' + slideNumber).classList.add('active');
+      const currentActive = document.querySelector('.slide.active');
+      const targetSlide = document.getElementById('slide' + slideNumber);
+
+      if (currentActive === targetSlide) return;
+
+      // GSAP Exit Animation
+      gsap.to(currentActive.querySelectorAll('.animate-element, .pwd-card'), {
+        opacity: 0,
+        y: -20,
+        duration: 0.3,
+        onComplete: () => {
+          currentActive.classList.remove('active');
+          targetSlide.classList.add('active');
+
+          // GSAP Enter Animation for New Slide
+          gsap.fromTo(targetSlide.querySelectorAll('.animate-element, .pwd-card'), 
+            { opacity: 0, y: 30, scale: 0.9 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.1, ease: "back.out(1.7)" }
+          );
+        }
+      });
     }
 
+    // Password Check
     function checkPassword() {
-      const input = document.getElementById('passInput').value;
+      const input = document.getElementById('passInput').value.trim();
       if (input.toLowerCase() === 'cheshu') {
+        triggerConfetti();
         nextSlide(2);
       } else {
-        alert('Galat password! Try entering "cheshu"');
+        gsap.to('.pwd-card', { x: [-10, 10, -10, 10, 0], duration: 0.4 });
+        alert('Wrong Password! Hint: Enter "Tumhara wo naam jo mai bulata hu"');
       }
     }
+
+    // Confetti Effect Function
+    function triggerConfetti() {
+      confetti({
+        particleCount: 70,
+        spread: 60,
+        origin: { y: 0.6 }
+      });
+    }
+
+    // Initial load animation
+    window.onload = () => {
+      gsap.from('.pwd-card', { opacity: 0, scale: 0.8, duration: 0.6, ease: "back.out(1.7)" });
+    };
   </script>
 </body>
 </html>
