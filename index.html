@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Special Surprise for Cheshta ❤️</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #fce4ec;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 700px;
+      height: 480px;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(225, 112, 137, 0.3);
+      position: relative;
+      overflow: hidden;
+      border: 8px solid #f8bbd0;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 25px;
+      text-align: center;
+      background-image: radial-gradient(#f8bbd0 1px, transparent 1px);
+      background-size: 20px 20px;
+      background-color: #fff5f8;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Wave Background Design */
+    .slide::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 150px;
+      height: 100%;
+      background: #e91e63;
+      border-radius: 0 100% 100% 0 / 0 50% 50% 0;
+      opacity: 0.15;
+      z-index: 0;
+    }
+
+    .content {
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    h1 {
+      color: #ad1457;
+      font-size: 26px;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    p {
+      color: #880e4f;
+      font-size: 16px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    img.sticker {
+      width: 110px;
+      height: 110px;
+      object-fit: contain;
+      margin-bottom: 15px;
+      filter: drop-shadow(0px 5px 5px rgba(0,0,0,0.1));
+    }
+
+    /* Password Input Box */
+    .password-box {
+      background: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      border: 1px solid #f48fb1;
+      width: 280px;
+    }
+
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 2px solid #f48fb1;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 16px;
+      outline: none;
+    }
+
+    /* Buttons */
+    .btn-group {
+      display: flex;
+      gap: 15px;
+    }
+
+    .btn {
+      background: #e91e63;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(233, 30, 99, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      background: #c2185b;
+    }
+
+    .btn-secondary {
+      background: #f48fb1;
+    }
+
+    /* Envelope styling */
+    .envelope {
+      width: 200px;
+      height: 130px;
+      background: #f48fb1;
+      border-radius: 10px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+      margin-bottom: 15px;
+    }
+
+    .envelope::after {
+      content: "🎀";
+      font-size: 30px;
+    }
+
+    /* Letter Card */
+    .letter-card {
+      background: #ffffff;
+      border: 2px dashed #f48fb1;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 420px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    /* Photo Frame Grid */
+    .photo-grid {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .photo-frame {
+      width: 110px;
+      height: 120px;
+      background: #fff;
+      padding: 6px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transform: rotate(-3deg);
+      border-radius: 5px;
+    }
+
+    .photo-frame:nth-child(2) {
+      transform: rotate(3deg);
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 85px;
+      object-fit: cover;
+      border-radius: 3px;
+    }
+
+    .photo-frame p {
+      font-size: 10px;
+      margin: 3px 0 0 0;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="slide active" id="slide1">
+      <div class="content">
+        <div class="password-box">
+          <p style="margin-bottom: 10px; font-weight: 600;">Enter the password to view</p>
+          <input type="password" id="passInput" placeholder="Password: cheshta">
+          <button class="btn" onclick="checkPassword()">Continue</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide2">
+      <div class="content">
+        <img class="sticker" src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Cute Dog">
+        <h1>HEY CHESHTA! ✨</h1>
+        <p>I made something special for you.<br>Do you want to see?</p>
+        <div class="btn-group">
+          <button class="btn" onclick="nextSlide(4)">Yes</button>
+          <button class="btn btn-secondary" onclick="nextSlide(3)">No</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide3">
+      <div class="content">
+        <img class="sticker" src="https://cdn-icons-png.flaticon.com/512/616/616554.png" alt="Angry Dog">
+        <h1>HOW DARE YOU 😤</h1>
+        <p>Aisa option select karne ki permission kisne di?</p>
+        <button class="btn" onclick="nextSlide(2)">Go back</button>
+      </div>
+    </div>
+
+    <div class="slide" id="slide4">
+      <div class="content">
+        <img class="sticker" src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Happy Dog">
+        <h1>That's a good girl ✨🌸</h1>
+        <p>Aap janti ho aap mere liye kitni special ho?</p>
+        <button class="btn" onclick="nextSlide(5)">Click</button>
+      </div>
+    </div>
+
+    <div class="slide" id="slide5">
+      <div class="content">
+        <img class="sticker" src="https://cdn-icons-png.flaticon.com/512/3159/3159420.png" alt="Party Dog">
+        <h1>YOU ARE SPECIAL CHESHTA 💖</h1>
+        <p>YOU ARE MY FAVORITE NOTIFICATION 📱<br>STAY CUTE, STAY HAPPY, STAY MINE ✨</p>
+        <button class="btn" onclick="nextSlide(6)">Next ➔</button>
+      </div>
+    </div>
+
+    <div class="slide" id="slide6">
+      <div class="content">
+        <h1>A Message For You 💌</h1>
+        <div class="envelope" onclick="nextSlide(7)">
+          <span style="position: absolute; bottom: 10px; color: white; font-weight: 600;">Tap here to open</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" id="slide7">
+      <div class="content">
+        <div class="letter-card">
+          <p style="font-size: 15px; color: #4a148c; font-weight: 500;">
+            "Cheshta, you are seen, you are heard, and you are truly valued. No matter what happens, if you ever feel down or overwhelmed, just remember that you always have someone who genuinely cares about you, supports you, and wishes the absolute best for you. Keep smiling always! ✨❤️"
+          </p>
+        </div>
+        <br>
+        <button class="btn" onclick="nextSlide(8)">Click here ➔</button>
+      </div>
+    </div>
+
+    <div class="slide" id="slide8">
+      <div class="content">
+        <div class="photo-grid">
+          <div class="photo-frame">
+            <img src="https://picsum.photos/200/200?random=1" alt="Photo 1">
+            <p>Best Moments</p>
+          </div>
+          <div class="photo-frame">
+            <img src="https://picsum.photos/200/200?random=2" alt="Photo 2">
+            <p>Always Smiling</p>
+          </div>
+          <div class="photo-frame">
+            <img src="https://picsum.photos/200/200?random=3" alt="Photo 3">
+            <p>Favorite Person</p>
+          </div>
+        </div>
+        <h1>I VALUED OUR BOND 🤍</h1>
+        <p>You don't know how much you mean to me!</p>
+        <button class="btn" onclick="nextSlide(9)">Click here ➔</button>
+      </div>
+    </div>
+
+    <div class="slide" id="slide9">
+      <div class="content">
+        <h1>Here's a surprise for you! 🎁</h1>
+        <div style="font-size: 70px; cursor: pointer; margin: 15px 0;" onclick="nextSlide(10)">
+          🎁
+        </div>
+        <p>Tap on the gift box!</p>
+      </div>
+    </div>
+
+    <div class="slide" id="slide10">
+      <div class="content">
+        <img class="sticker" src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" alt="Virtual Hug" style="width: 140px; height: 140px;">
+        <h1>Here is a big virtual hug for you! 🤗✨</h1>
+        <p>Always stay happy Cheshta! ❤️</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function nextSlide(slideNumber) {
+      const slides = document.querySelectorAll('.slide');
+      slides.forEach(slide => slide.classList.remove('active'));
+      document.getElementById('slide' + slideNumber).classList.add('active');
+    }
+
+    function checkPassword() {
+      const input = document.getElementById('passInput').value;
+      // Password default hai: cheshu
+      if (input.toLowerCase() === 'cheshu') {
+        nextSlide(2);
+      } else {
+        alert('Galat password! Try entering "cheshu"');
+      }
+    }
+  </script>
+</body>
+</html>
